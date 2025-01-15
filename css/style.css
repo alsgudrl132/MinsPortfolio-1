@@ -1,0 +1,590 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  font-family: Century Gothic, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 25px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #87ceeb;
+  background-clip: padding-box;
+  border-radius: 0 20px 20px 0;
+}
+::-webkit-scrollbar-track {
+  background-color: #f0f8ff;
+  border-radius: 0 20px 20px 0;
+  box-shadow: inset 0px 0px 5px black;
+}
+
+.main-container {
+  position: relative;
+  background-color: #f0f8ff;
+  min-height: 100vh;
+  margin: 0px;
+  overflow: hidden;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.about-container,
+.projects-container,
+.github-container,
+.notion-container,
+.blog-container {
+  padding: 25px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.about-icon:hover,
+.projects-icon:hover,
+.github-icon:hover,
+.notion-icon:hover,
+.blog-icon:hover {
+  transform: scale(1.15);
+}
+.github-icon,
+.blog-icon {
+  background-color: #ffffff;
+  height: 1.3em;
+  font-size: 70px;
+  border: 3px solid black;
+  border-radius: 15%;
+  box-shadow: 8px 8px 8px black;
+  transition: transform 0.2s ease-in-out;
+}
+.notion-icon {
+  background-color: #ffffff;
+  height: 1.3em;
+  font-size: 70px;
+  border: 3px solid black;
+  border-radius: 15%;
+  box-shadow: 8px 8px 8px black;
+  transition: transform 0.2s ease-in-out;
+}
+.about-icon {
+  background-color: #ffffff;
+  height: 1.3em;
+  font-size: 70px;
+  border: 3px solid black;
+  border-radius: 15%;
+  box-shadow: 8px 8px 8px black;
+  transition: transform 0.2s ease-in-out;
+}
+.projects-icon {
+  background-color: #ffffff;
+  height: 1.3em;
+  font-size: 70px;
+  border: 3px solid black;
+  border-radius: 15%;
+  box-shadow: 8px 8px 8px black;
+  transition: transform 0.2s ease-in-out;
+}
+.about-container p,
+.projects-container p,
+.github-container p,
+.notion-container p,
+.blog-container p {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: default;
+}
+.notion-container p {
+  margin-left: 17px;
+}
+.about-container p {
+  margin-left: 20px;
+}
+.projects-container p {
+  margin-left: 13px;
+}
+.github-container p {
+  margin-left: 18px;
+}
+.blog-container p {
+  margin-left: 30px;
+}
+.footer-bar {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 100%;
+  background-color: #87ceeb;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  text-align: end;
+  margin-top: 100px;
+  padding-right: 30px;
+  padding-top: 18.4px;
+  padding-bottom: 18.4px;
+}
+.footer-bar p {
+  font-weight: 600;
+  font-size: 25px;
+  color: black;
+}
+.footer-bar p:last-child {
+  margin-right: 15px;
+}
+/** 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: slideIn 0.5s ease-in-out;
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f0f8ff;
+  padding: 20px;
+  border: 5px solid black;
+  border-radius: 25px;
+  box-shadow: 12px 12px 12px black;
+}
+.modal-content-about {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f0f8ff;
+  padding: 20px;
+  border: 5px solid black;
+  border-radius: 25px;
+  box-shadow: 12px 12px 12px black;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.close {
+  position: fixed;
+  top: 10px;
+  left: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 36px;
+  line-height: 36px;
+  display: inline-block;
+}
+.close-box {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.close-box::before {
+  content: ""; /* 가상 요소를 생성하여 밑줄을 만듭니다. */
+  display: block;
+  border-bottom: 5px solid black;
+  width: 100%; /* 원하는 길이로 조정 가능 */
+  margin: 20px 0px; /* 가운데 정렬을 위해 추가 */
+}
+
+@keyframes bounceIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2); /* 조금 더 크게 나타나는 중간 상태 */
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* 최종적으로 원래 크기로 설정 */
+  }
+}
+.about-info-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.about-info-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+.about-info-container img {
+  margin-top: 15px;
+  margin-right: 10px;
+}
+.about-info-box p:first-child {
+  font-size: 30px;
+}
+.about-info0box div {
+  text-align: left;
+}
+.about-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  border: 1px solid #f0f8ff;
+}
+.about-img-container img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 5px;
+}
+.modal-content h1 {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+.modal-container {
+  width: 100%;
+  padding: 20px;
+}
+.modal-box {
+  display: block;
+  justify-content: flex-start;
+  align-items: center;
+}
+.modal-img {
+  width: 100px;
+  height: 100px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  border-radius: 15%;
+  box-shadow: 8px 8px 8px black;
+  transition: transform 0.2s ease-in-out;
+}
+.modal-img:hover {
+  transform: scale(1.15);
+}
+.project-div {
+  width: 25%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/** 새로운 모달 */
+.new-modal {
+  display: none;
+  position: fixed;
+  top: 53%;
+  left: 55%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: slideIn 0.5s ease-in-out;
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.new-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f0f8ff;
+  padding: 20px;
+  border: 5px solid black;
+  border-radius: 25px;
+  box-shadow: 12px 12px 12px black;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+}
+
+.skill-name {
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/** 프로젝트 관련 파트 */
+.project-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.project-title img {
+  margin-right: 20px;
+}
+
+.project-title h1 {
+  font-size: 36px;
+}
+
+.project-title h3 {
+  font-size: 24px;
+}
+
+.project-title-content {
+  width: 70%;
+  margin-right: 20px;
+}
+
+.task-flex-container {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+}
+
+.task-container {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.task-container h6 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.task-container ul {
+  margin-bottom: 15px;
+}
+
+.task-container li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.task-container span {
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.task-img-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.task-img-container img:nth-child(n + 2) {
+  max-width: calc(50% - 10px);
+}
+
+.task-img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.new-modal-content {
+  max-width: 1200px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.modal-box h1,
+.modal-box h6 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.project-title-content a {
+  margin-left: 15px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.experience-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.experience-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.experience-container > div {
+  flex: 0 0 auto;
+  min-width: 150px;
+  margin: 10px;
+}
+
+.experience-container h4 {
+  margin-bottom: 10px;
+}
+.experience-container h6 {
+  font-weight: 500;
+}
+.profile-container {
+  display: flex;
+  justify-content: center;
+}
+.profile-container strong {
+  font-weight: 600;
+  font-size: 40px;
+}
+.project-title-content a {
+  text-decoration: none;
+  color: blue;
+}
+.chatApp-flexbox,
+.teamApp-flexbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.p-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  padding-right: 120px;
+  padding-left: 100px;
+  border-right: 5px solid black;
+}
+.p-group p {
+  font-size: 25px;
+}
+
+/* 모바일 기기 대응 */
+@media (max-width: 768px) {
+  /* 메인 컨테이너 */
+  .flex-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 아이콘 컨테이너 */
+  .about-container,
+  .projects-container,
+  .github-container,
+  .notion-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  /* 아이콘 크기 조정 */
+  .about-icon,
+  .projects-icon,
+  .github-icon,
+  .notion-icon {
+    font-size: 50px;
+  }
+
+  /* 모달 크기 및 위치 조정 */
+  .modal-content,
+  .modal-content-about,
+  .new-modal-content {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  /* About 모달 내부 구조 */
+  .about-info-container {
+    flex-direction: column;
+  }
+
+  .about-info-box {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  /* 프로젝트 모달 내부 구조 */
+  .project-title {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .project-title img {
+    margin-bottom: 15px;
+  }
+
+  .project-title-content {
+    width: 100%;
+  }
+
+  /* 프로젝트 그리드 조정 */
+  .dev-group,
+  .publish-group {
+    flex-direction: column;
+    height: auto !important;
+  }
+
+  .p-group {
+    width: 100%;
+    padding: 10px;
+    border-right: none;
+    border-bottom: 5px solid black;
+  }
+
+  .project-div {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  /* 이미지 컨테이너 조정 */
+  .task-img-container {
+    flex-direction: column;
+  }
+
+  .task-img {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+/* 태블릿 대응 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .flex-container {
+    justify-content: center;
+  }
+
+  .modal-content,
+  .modal-content-about,
+  .new-modal-content {
+    width: 90%;
+  }
+
+  .project-div {
+    width: 33%;
+  }
+}
